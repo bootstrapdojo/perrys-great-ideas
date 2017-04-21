@@ -7,19 +7,13 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
     <script src="app.js"></script>
 </head>
 
-<body ng-controller="IdeasListController">
-    <h1>Ideas</h1>
-
-    <p>Viable: <strong>{{1 + 2}}</strong>
-
-    <ul>
-        <li ng-repeat="idea in ideas">
-            <input type="checkbox" ng-checked="idea.viable"> {{idea.idea}}
-        </li>
-    </ul>
+<body>
+    <a ui-sref="ideaList">List</a> <a ui-sref="ideaForm">Form</a>
+    <div ui-view></div>
 </body>
 
 </html>
