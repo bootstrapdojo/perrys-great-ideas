@@ -1,10 +1,11 @@
-<h1>Ideas</h1>
+<h1>{{listTitle}}</h1>
 
 <p>Viable: <strong>{{1 + 2}}</strong>
 
 <ul>
-    <div>Ideas for {{today | date: 'yyyy-MM-dd'}}</div>
+    <div>Ideas for {{today | date: 'yyyy-MMM-dd'}}</div>
     <li ng-repeat="idea in ideas">
-        <input type="checkbox" ng-checked="idea.viable"> {{idea.idea | uppercase}}
+        <input type="checkbox" ng-model="idea.viable"> {{idea.idea | uppercase}}
     </li>
+    <button ng-click="doFilter()" ng-if="listTitle == 'My viable ideas'">Filter ideas</button>
 </ul>
