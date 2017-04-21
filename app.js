@@ -16,7 +16,7 @@ greatIdeasApp.config(function ($stateProvider) {
 
 // Define the `IdeasListController` controller on the `greatIdeasApp` module
 greatIdeasApp.controller('IdeasListController', function IdeasListController($scope, ideasResource) {
-
+    $scope.today = new Date();
     var ideasResponse = ideasResource.get();
 
     ideasResponse.$promise.then(function (data) {

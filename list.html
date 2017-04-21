@@ -3,7 +3,8 @@
 <p>Viable: <strong>{{1 + 2}}</strong>
 
 <ul>
+    <div>Ideas for {{today | date: 'yyyy-MM-dd'}}</div>
     <li ng-repeat="idea in ideas">
-        <input type="checkbox" ng-checked="idea.viable"> {{idea.idea}}
+        <input type="checkbox" ng-checked="idea.viable"> {{idea.idea | uppercase}}
     </li>
 </ul>
