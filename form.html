@@ -1,5 +1,5 @@
 <form name="myform" ng-submit="submitForm(myform)">
-    Name: <input type="text" name="idea" ng-maxlength="15" maxlength="15" ng-model="idea.idea"/>
+    Name: <input type="text" name="idea" ng-maxlength="15" maxlength="15" ng-model="idea.idea" ng-required="true" minlength="5" ng-pattern ="/^[a-zA-Z\s]*$/" />
     <br>
     Viable: <input type="checkbox" name="viable" ng-model="idea.viable"/>
     <br>
