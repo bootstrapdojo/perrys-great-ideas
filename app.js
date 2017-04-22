@@ -20,7 +20,8 @@ greatIdeasApp.config(function ($stateProvider) {
         })
         .state('ideaForm', {
             url: '/form',
-            templateUrl: 'form.html'
+            templateUrl: 'form.html',
+            controller: 'IdeaFormController'
         });
 });
 
@@ -45,8 +46,27 @@ greatIdeasApp.controller('ViableIdeaListController', function ViableIdeaListCont
 
     $scope.doFilter = function () {
         $scope.ideas = $scope.ideas.filter(function (idea) {
+            console.debug('checking idea. idea=' + JSON.stringify(idea));
             return idea.viable;
         });
+    };
+
+});
+
+greatIdeasApp.controller('IdeaFormController', function IdeaFormController($scope) {
+
+    $scope.idea = {};
+    $scope.submitForm = function (theform) {
+        if (theform.$invalid) {
+            alert('form is invalid!');
+            return false;
+        }
+         alert('form submitted!');
+         $scope.idea = {};
+    };
+
+    $scope.clearForm = function () {
+        $scope.idea = {};
     };
 
 });

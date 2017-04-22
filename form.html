@@ -1,5 +1,12 @@
-<form>
-    Name: <input type="text" name="idea" />
+<form name="myform" ng-submit="submitForm(myform)">
+    Name: <input type="text" name="idea" ng-maxlength="15" maxlength="15" ng-model="idea.idea"/>
     <br>
-    Viable: <input type="checkbox" name="viable" />
+    Viable: <input type="checkbox" name="viable" ng-model="idea.viable"/>
+    <br>
+    <input type="submit"/><a href="javascript:;" ng-click="clearForm()">Clear</a>
+
+    <br>
+    <br>
+    Idea: {{idea.idea}}<br>
+    Viable: {{idea.viable}}<br>
 </form>
