@@ -37,7 +37,14 @@ greatIdeasApp.controller('IdeasListController', function IdeasListController($sc
 });
 
 greatIdeasApp.factory('ideasResource', function ($resource) {
-    var ideasResource = $resource('https://api.myjson.com/bins/1gxu7j');
+    var ideasResource = $resource('https://api.myjson.com/bins/1gxu7j', null,
+        {
+            'update': {
+                method: 'PUT',
+                isArray: true
+            }
+        }
+    );
     return ideasResource;
 });
 
@@ -53,20 +60,54 @@ greatIdeasApp.controller('ViableIdeaListController', function ViableIdeaListCont
 
 });
 
-greatIdeasApp.controller('IdeaFormController', function IdeaFormController($scope) {
+greatIdeasApp.controller('IdeaFormController', function IdeaFormController($scope, ideasResource) {
 
-    $scope.idea = {};
+    //Get the existing list of ideas
+    var ideas;
+    var ideasResponse = ideasResource.get();
+    ideasResponse.$promise.then(function (data) {
+        ideas = data.ideas;
+        console.debug('Got ideas=' + JSON.stringify(ideas));
+    });
+
+    //Accept the new idea submitted by the user
+    $scope.idea = {viable: false};
     $scope.submitForm = function (theform) {
         if (theform.$invalid) {
             alert('form is invalid!');
             return false;
         }
-         alert('form submitted!');
-         $scope.idea = {};
+
+        ideas.push($scope.idea);
+        ideasResource.update({}, ideas);
+        $scope.idea = {};
     };
 
     $scope.clearForm = function () {
         $scope.idea = {};
+    };
+
+    $scope.questions = [
+        {
+            text: "Is this VAT inclusive?",
+            answer: 0,
+            yesText: "Yes, this is VAT inclusive",
+            noText: "No, it's not",
+            help: "How could you not know what VAT is?",
+            link: "http://www.bir.com.ph"
+        },
+        {
+            text: "Are there financial instruments?",
+            answer: 0,
+            yesText: "SIGNIFICANT ACCOUNTING POLICIES + OTHER THINGS",
+            noText: "SIGNIFICANT ACCOUNTING POLICIES",
+            help: "Financial instruments include cash"
+        }
+    ];
+
+    $scope.financialStatement = {
+        hasNoteNumber: true,
+        totalAmountOfTax: 50000
     };
 
 });

@@ -1,9 +1,26 @@
 <form name="myform" ng-submit="submitForm(myform)">
-    Name: <input type="text" name="idea" ng-maxlength="15" maxlength="15" ng-model="idea.idea" ng-required="true" minlength="5" ng-pattern ="/^[a-zA-Z\s]*$/" />
+    Name: <input type="text" name="idea" ng-maxlength="15" ng-model="idea.idea" ng-required="true" minlength="5" ng-pattern ="/^[a-zA-Z\s]*$/" />
     <br>
     Viable: <input type="checkbox" name="viable" ng-model="idea.viable"/>
     <br>
-    <input type="submit"/><a href="javascript:;" ng-click="clearForm()">Clear</a>
+    <table border=1>
+    <tr ng-repeat="question in questions" ng-init="showhelp = false">
+        <td title="{{question.help}}">{{$index}} {{question.text}}</td>
+        <td>
+            <select ng-model="question.answer">
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+            </select>
+        </td>
+        <td ng-if="question.answer == 1">{{question.yesText}}</td>
+        <td ng-if="question.answer == 2">{{question.noText}}</td>
+        <td><a href="javascript:;" ng-click="showhelp = !showhelp">?</a></td>
+        <td><a href="{{question.link}}">Link</a></td>
+        <td ng-if="showhelp">{{question.help}}</td>
+    </tr>
+    <table>
+
+        <input type="submit"/><a href="javascript:;" ng-click="clearForm()">Clear</a>
 
     <br>
     <br>
