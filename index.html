@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="greatIdeasApp">
 
 <head>
     <meta charset="utf-8">
     <title>Perry's Great Ideas</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="app.js"></script>
 </head>
 
-<body>
+<body ng-controller="IdeasListController">
     <h1>Ideas</h1>
 
-    <p>Viable: <strong>3</strong>
+    <p>Viable: <strong>{{1 + 2}}</strong>
 
     <ul>
-        <li><input type="checkbox"> Blogging platform that tracks eye movement
-        <li><input type="checkbox"> Microwave that plays youtube videos
-        <li><input type="checkbox"> Perrycoin
-        <li><input type="checkbox"> E-junkshop
+        <li ng-repeat="idea in ideas">
+            <input type="checkbox" ng-checked="idea.viable"> {{idea.idea}}
+        </li>
     </ul>
 </body>
 
